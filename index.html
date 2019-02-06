@@ -118,6 +118,10 @@ input.oninput = function() {
 		window.history.pushState('','', window.location.protocol + "//" + window.location.host + window.location.pathname);
 
 	Object.keys(cipher).forEach(function(key) { a += ((input.value).split(key).length - 1)*cipher[key]; }); 
+	
+	if (/\d/.test(input.value))
+		a += ((input.value)).match(/\d+/g).map(Number).reduce(function(b, c) { return b + c; }, 0);
+	
 	result.innerHTML = a;
 		if (typeof naeq[a] !== 'undefined') {
 			count.innerHTML = naeq[a].length;
