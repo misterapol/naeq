@@ -111,32 +111,30 @@
 <script src="data.js"></script>
 <script>
 input.oninput = function() {
-	setTimeout(function() {
-		a = 0;
+	a = 0;
 
-		if (input.value !== "")
-			window.history.pushState('','','?' + "v=" + input.value);
-		else
-			window.history.pushState('','', window.location.protocol + "//" + window.location.host + window.location.pathname);
+	if (input.value !== "")
+		window.history.pushState('','','?' + "v=" + input.value);
+	else
+		window.history.pushState('','', window.location.protocol + "//" + window.location.host + window.location.pathname);
 
-		Object.keys(cipher).forEach(function(key) { a += ((input.value).split(key).length - 1)*cipher[key]; }); 
-
-		if (/\d/.test(input.value))
-			a += ((input.value)).match(/\d+/g).map(Number).reduce(function(b, c) { return b + c; }, 0);
-
-		result.innerHTML = a;
-			if (typeof naeq[a] !== 'undefined') {
-				count.innerHTML = naeq[a].length;
-				match.innerHTML = "";
-				Object.keys(naeq[a]).forEach(function(key) { 
-					match.innerHTML += "<li>" + naeq[a][key] + "</li>"; 
-				})
-			}
-			else {
-				count.innerHTML = 0;
-				match.innerHTML = "N/A";
-			}
-	}, 666);
+	Object.keys(cipher).forEach(function(key) { a += ((input.value).split(key).length - 1)*cipher[key]; }); 
+	
+	if (/\d/.test(input.value))
+		a += ((input.value)).match(/\d+/g).map(Number).reduce(function(b, c) { return b + c; }, 0);
+	
+	result.innerHTML = a;
+		if (typeof naeq[a] !== 'undefined') {
+			count.innerHTML = naeq[a].length;
+			match.innerHTML = "";
+			Object.keys(naeq[a]).forEach(function(key) { 
+				match.innerHTML += "<li>" + naeq[a][key] + "</li>"; 
+			})
+		}
+		else {
+			count.innerHTML = 0;
+			match.innerHTML = "N/A";
+		}
 }
 
 document.body.onload = function() { 
